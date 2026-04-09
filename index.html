@@ -1,23 +1,438 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
+
+ <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "AutoDealer",
+      "name": "머스탱리스 전문 견적 서비스",
+      "image": "https://images.pexels.com/photos/1035154/pexels-photo-1035154.jpeg",
+      "url": "https://example.com/mustanglease",
+      "telephone": "1661-1234",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "서울특별시 강남구 테헤란로 123",
+        "addressLocality": "서울시",
+        "addressRegion": "서울",
+        "postalCode": "06000",
+        "addressCountry": "KR"
+      },
+      "areaServed": {
+        "@type": "ServiceArea",
+        "name": "대한민국 전역"
+      },
+      "priceRange": "₩₩₩",
+      "description": "2026년형 머스탱 리스 견적 비교 서비스. GT, EcoBoost, Dark Horse 모델별 가격, 장단점, 프로모션 정보를 제공합니다. 초기 비용 없는 리스, 신규 혜택, 할인 정보까지 전문가가 상담해 드립니다."
+    }
+    </script>
+
+    <style>
+      /* Noto Sans KR 폰트 적용 및 기본 스타일 설정 */
+      @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+      body { font-family: 'Noto Sans KR', sans-serif; margin:0; padding:0; background:#f5f8fb; color:#333; line-height:1.7; font-size:16px; }
+      header { background:#ffffff; border-bottom:1px solid #e0e6ec; padding:40px 20px; text-align:center; box-shadow:0 2px 5px rgba(0,0,0,0.05); }
+      main { max-width:1000px; margin:20px auto; padding:20px; background:#ffffff; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.05); }
+      section { margin-bottom:50px; padding:25px; border-radius:10px; background:#ffffff; }
+      h1 { font-size:3.0rem; font-weight:800; color:#2c3e50; margin-bottom:15px; }
+      h2 { font-size:2.2rem; border-bottom:3px solid #e74c3c; padding-bottom:15px; font-weight:700; color:#c0392b; margin-top:30px; }
+      h3 { font-size:1.8rem; border-left:5px solid #e74c3c; padding-left:15px; margin-top:25px; font-weight:600; color:#34495e; }
+      p, li, td, th { font-size:1.1rem; line-height:1.8; color:#444; }
+      ul, ol { padding-left:25px; margin-top:15px; }
+      li { margin-bottom:10px; }
+      table { width:100%; border-collapse: collapse; margin:25px 0; font-size:1.05rem; }
+      th, td { border:1px solid #dddddd; padding:18px; text-align:left; vertical-align:top; }
+      th { background:#f2f4f6; color:#333; font-weight:600; }
+      a { color:#3498db; text-decoration:none; transition: color 0.3s; }
+      a:hover { text-decoration:underline; color:#2980b9; }
+
+      /* CTA Button Styling */
+      .btn-cta {
+        display:inline-block;
+        padding:15px 30px;
+        background:#e74c3c; /* Mustang Red/Accent */
+        color:#fff;
+        font-weight:700;
+        border:none;
+        border-radius:30px;
+        box-shadow:0 6px 10px rgba(231, 76, 60, 0.4);
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        text-decoration:none;
+        text-align:center;
+        margin-top:25px;
+        font-size:1.1rem;
+      }
+      .btn-cta:hover { background:#c0392b; transform:translateY(-2px); }
+      .anchor { display:block; position:relative; top:-100px; visibility:hidden; }
+
+      /* Highlighted Sections */
+      .highlight { background-color: #fcf8e3; padding:20px; border-left:5px solid #f39c12; margin:25px 0; border-radius:8px; }
+      .sub-section { padding:20px; border:1px solid #e0e6ec; border-radius:8px; margin-top:20px; background:#fafafa; }
+
+      /* Form Styling */
+      .form-group { margin-bottom:20px; }
+      .form-group label { display:block; font-weight:600; margin-bottom:8px; color:#555; font-size:1.05rem; }
+      .form-group input, .form-group select, .form-group textarea {
+        width:calc(100% - 24px); padding:12px; border:1px solid #ccddee; border-radius:6px; box-sizing:border-box;
+        font-size:1rem; color:#333; background:#ffffff; transition: border-color 0.3s;
+      }
+      .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: #e74c3c; outline:none; }
+      .radio-group label { display:inline-block; margin-right:20px; font-weight:400; }
+
+      /* Footer Styling */
+      footer { text-align:center; padding:30px; background:#eef5ff; margin-top:40px; border-top:1px solid #e0e6ec; }
+
+      /* Responsive Design */
+      @media(max-width:768px) {
+        body { font-size:15px; }
+        header { padding:30px 15px; }
+        main { margin:10px auto; padding:15px; }
+        h1 { font-size:2.4rem; }
+        h2 { font-size:1.9rem; }
+        h3 { font-size:1.6rem; }
+        p, li, td, th { font-size:1rem; line-height:1.7; }
+        .btn-cta { width:100%; padding:15px 0; font-size:1rem; }
+        .form-group input, .form-group select, .form-group textarea { width:calc(100% - 20px); }
+      }
+    </style>
+</head>
+
+<body>
+  <header>
+    <h1><span style="color:#e74c3c;">머스탱리스</span> 완벽 가이드 2026: 비용, 장단점, 견적 비교 및 추천 모델 분석</h1>
+    <p>포드 머스탱 GT, EcoBoost, Dark Horse까지. 드림카를 소유하는 가장 현명한 방법, <span style="font-weight:bold; color:#e74c3c;">머스탱리스</span>의 모든 것을 전문가가 분석해 드립니다.</p>
+    <a class="btn-cta" href="#contact">지금 바로 머스탱 리스 견적 문의하기</a>
+  </header>
+
+  <main>
+    <nav aria-label="페이지 내 이동">
+      <ul style="list-style-type:none; padding:0; display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin-bottom:30px;">
+        <li><a href="#introduction" class="btn-cta" style="background:#f0f4f8; color:#333; box-shadow:none; padding:10px 20px;">왜 리스인가?</a></li>
+        <li><a href="#comparison" class="btn-cta" style="background:#f0f4f8; color:#333; box-shadow:none; padding:10px 20px;">리스 VS 할부 비교</a></li>
+        <li><a href="#models" class="btn-cta" style="background:#f0f4f8; color:#333; box-shadow:none; padding:10px 20px;">모델별 가격 분석</a></li>
+        <li><a href="#cost" class="btn-cta" style="background:#f0f4f8; color:#333; box-shadow:none; padding:10px 20px;">비용 절감 팁</a></li>
+        <li><a href="#faq" class="btn-cta" style="background:#f0f4f8; color:#333; box-shadow:none; padding:10px 20px;">자주 묻는 질문</a></li>
+        <li><a href="#contact" class="btn-cta" style="background:#f0f4f8; color:#333; box-shadow:none; padding:10px 20px;">견적 문의</a></li>
+      </ul>
     </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+
+    <section id="introduction">
+      <span id="introduction-anchor" class="anchor"></span>
+      <h2><span style="color:#e74c3c;">머스탱리스</span>, 왜 2026년 드림카 소유의 대세로 떠오르는가?</h2>
+      <p>머스탱(Ford Mustang)은 60년 이상의 역사를 가진 상징적인 아메리칸 머슬카입니다. 2026년 현재, 새로운 7세대 모델(S650)이 국내에 출시되면서 더욱 많은 관심과 수요가 집중되고 있습니다. <span style="font-weight:bold; color:#e74c3c;">머스탱리스</span>는 이러한 드림카를 상대적으로 저렴한 <span style="font-weight:bold;">월 납입금</span>으로 경험할 수 있는 가장 합리적인 방법 중 하나입니다.</p>
+      <div class="highlight">
+        <h3>머스탱리스가 주목받는 3가지 이유</h3>
+        <ul>
+          <li><strong>경제적인 초기 비용:</strong> 차량 구매 시 필요한 취득세, 등록세, 자동차 보험료 등을 리스사에서 대신 납부하므로 초기 비용 부담이 현저히 줄어듭니다.</li>
+          <li><strong>세금 절감 효과:</strong> 개인사업자나 법인사업자의 경우 <span style="font-weight:bold; color:#e74c3c;">머스탱리스</span> 비용 전체를 손비 처리하여 세금 공제 혜택을 받을 수 있습니다.</li>
+          <li><strong>유연한 차량 관리:</strong> 정비 포함 조건으로 계약할 경우 소모품 교체 및 정비까지 리스사에서 관리해주므로 차량 관리가 매우 편리해집니다.</li>
+        </ul>
+        <p>특히 고성능 스포츠카인 <span style="font-weight:bold; color:#e74c3c;">머스탱 GT</span>나 <span style="font-weight:bold; color:#e74c3c;">머스탱 EcoBoost</span> 모델은 차량 가격대가 높고 유지 보수 비용이 발생할 수 있으므로, 초기 비용 부담이 적고 세금 혜택을 누릴 수 있는 <span style="font-weight:bold; color:#e74c3c;">머스탱리스</span>가 젊은 세대와 사업자들에게 <span style="font-weight:bold;">저렴한 곳</span>으로 인식되며 선호도가 높아지고 있습니다.</p>
+      </div>
+    </section>
+
+    <section id="comparison">
+      <span id="comparison-anchor" class="anchor"></span>
+      <h2><span style="color:#e74c3c;">머스탱리스</span> VS 할부 VS 장기렌트: 장단점 비교 및 차이점 분석</h2>
+      <p>머스탱을 소유하는 방식은 크게 리스, 할부 구매, 장기 렌트로 나뉩니다. 각 방법은 <span style="font-weight:bold; color:#e74c3c;">머스탱 가격</span>과 <span style="font-weight:bold; color:#e74c3c;">머스탱 비용</span> 측면에서 확연한 차이를 보입니다. 고객님의 상황(운행 거리, 초기 자금, 세금 혜택 필요 여부)에 따라 최적의 방법을 선택하는 것이 중요합니다.</p>
+      
+      <h3>1. 머스탱 리스 (Lease)</h3>
+      <p><span style="font-weight:bold; color:#e74c3c;">머스탱리스</span>는 금융사(리스사)가 차량을 구입한 후, 고객에게 일정 기간(24~60개월) 동안 임대해주는 방식입니다. 차량 번호판은 일반 자가용 번호판을 사용합니다.</p>
+      <ul>
+        <li><strong>장점:</strong> 초기 비용 최소화, 세금 혜택(손비 처리), 보험 경력 유지, 일반 번호판 사용, 계약 만기 시 인수/반납/재리스 선택 가능.</li>
+        <li><strong>단점:</strong> 주행거리 제한(초과 시 위약금), 차량 소유권이 리스사에 있음, 중도 해지 시 위약금 발생.</li>
+        <li><strong>추천 대상:</strong> 개인사업자/법인사업자, 주행거리가 일정하고 초기 자금 부담을 줄이고 싶은 개인.</li>
+      </ul>
+      
+      <h3>2. 머스탱 할부 (Purchase)</h3>
+      <p>차량을 직접 구매하고 금융사로부터 대출을 받아 매월 원리금을 상환하는 방식입니다. 차량 소유권이 고객에게 있습니다.</p>
+      <ul>
+        <li><strong>장점:</strong> 주행거리 제한 없음, 차량 소유권 확보, 차량 외관 변경(튜닝) 자유로움, 감가상각을 활용한 절세(법인), 재산세 부과 대상 제외(개인사업자).</li>
+        <li><strong>단점:</strong> 높은 초기 비용(취득세, 등록세, 보험료), 전액 할부 시 이자 부담 높음, 재산세 및 건강보험료 상승(개인).</li>
+        <li><strong>추천 대상:</strong> 짐이 많아 <span style="font-weight:bold;">머스탱 컨버터블</span>이나 <span style="font-weight:bold;">머스탱 GT</span>를 장기적으로 소유하고 싶은 분, 튜닝을 선호하는 분.</li>
+      </ul>
+      
+      <h3>3. 머스탱 장기렌트 (Long-term Rental)</h3>
+      <p>렌터카 회사로부터 차량을 빌려 일정 기간 동안 사용하는 방식입니다. 보험 및 정비가 모두 포함됩니다.</p>
+      <ul>
+        <li><strong>장점:</strong> 초기 비용 0원, 모든 비용(보험, 정비)이 월 납입금에 포함, 사고 시 면책금만 납부, 재산세/건강보험료 상승 없음.</li>
+        <li><strong>단점:</strong> "하, 허, 호" 번호판 사용, 주행거리 제한, 리스 대비 상대적으로 비싼 총 비용.</li>
+        <li><strong>추천 대상:</strong> 개인 명의로 재산 증가를 원치 않는 분, 사고 위험이 높고 모든 관리를 맡기고 싶은 분.</li>
+      </ul>
+
+      <p><strong><span style="font-weight:bold; color:#e74c3c;">머스탱리스</span> vs 할부 vs 렌트 비교표 (2026년 기준)</strong></p>
+      <div style="overflow-x:auto;">
+        <table>
+          <thead>
+            <tr>
+              <th>구분</th>
+              <th>머스탱 리스 (Lease)</th>
+              <th>머스탱 할부 구매 (Purchase)</th>
+              <th>머스탱 장기렌트 (Rental)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>차량 번호판</strong></td>
+              <td>일반 번호판 (개인 명의)</td>
+              <td>일반 번호판 (개인 명의)</td>
+              <td>'하, 허, 호' (렌터카 명의)</td>
+            </tr>
+            <tr>
+              <td><strong>초기 비용</strong></td>
+              <td>0원~보증금/선납금 (선택 가능)</td>
+              <td>취등록세, 보험료 등 발생</td>
+              <td>0원 (대부분)</td>
+            </tr>
+            <tr>
+              <td><strong>세금 혜택</strong></td>
+              <td>손비 처리 가능 (개인사업자/법인)</td>
+              <td>감가상각비 처리 가능 (법인)</td>
+              <td>손비 처리 가능 (개인사업자/법인)</td>
+            </tr>
+            <tr>
+              <td><strong>보험 가입</strong></td>
+              <td>개인 요율 적용 (경력 유지)</td>
+              <td>개인 요율 적용</td>
+              <td>렌터카 요율 적용 (경력 단절)</td>
+            </tr>
+            <tr>
+              <td><strong>재산/건보료</strong></td>
+              <td>리스사 명의로 재산세/건보료 변동 없음</td>
+              <td>개인 재산으로 잡혀 변동 발생</td>
+              <td>렌터카 명의로 변동 없음</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p><em>*2026년 기준 포드 머스탱 S650 모델에 대한 비교이며, 금융사별 조건 및 프로모션에 따라 세부 내용은 변동될 수 있습니다. <span style="font-weight:bold;">머스탱리스</span>를 <span style="font-weight:bold;">저렴한 곳</span>에서 찾으려면 반드시 전문가의 꼼꼼한 비교 견적이 필요합니다.</em></p>
+    </section>
+
+    <section id="models">
+      <span id="models-anchor" class="anchor"></span>
+      <h2><span style="color:#e74c3c;">머스탱리스</span> 모델별 상세 분석: GT, EcoBoost, Dark Horse 가격 및 장단점</h2>
+      <p>머스탱은 고성능 모델인 <span style="font-weight:bold; color:#e74c3c;">머스탱 GT</span>와 대중적인 <span style="font-weight:bold; color:#e74c3c;">머스탱 EcoBoost</span>가 주력입니다. 2026년형 7세대 모델은 디자인과 퍼포먼스에서 큰 변화를 가져왔으며, 각 모델별 특징을 이해하면 리스 선택에 도움이 됩니다.</p>
+
+      <h3>1. 머스탱 GT (V8 Engine) - 고성능 모델</h3>
+      <p><strong>주요 특징:</strong> 머스탱 GT는 5.0L V8 자연흡기 엔진이 탑재되어 400마력 이상의 압도적인 출력을 자랑합니다. 강력한 퍼포먼스와 V8 엔진 특유의 배기음은 진정한 머슬카의 매력을 느끼게 해줍니다. <span style="font-weight:bold; color:#e74c3c;">머스탱리스</span>를 통해 GT를 선택하는 고객은 주로 운전의 즐거움과 성능을 최우선으로 생각합니다.</p>
+      <ul>
+        <li><strong>장점:</strong> 강력한 주행 성능, 상징적인 V8 사운드, 높은 브랜드 가치.</li>
+        <li><strong>단점:</strong> EcoBoost 대비 높은 차량 <span style="font-weight:bold;">가격</span> 및 유지보수 <span style="font-weight:bold;">비용</span>, 상대적으로 높은 유류비.</li>
+        <li><strong>리스 팁:</strong> <span style="font-weight:bold;">머스탱 GT</span> 모델은 잔존가치(만기 시 예상 중고 가격)가 높게 책정되어 <span style="font-weight:bold;">머스탱리스</span> 월 납입금을 상대적으로 줄일 수 있습니다.</li>
+      </ul>
+
+      <h3>2. 머스탱 EcoBoost (I4 Engine) - 합리적인 대안</h3>
+      <p><strong>주요 특징:</strong> 2.3L 터보 엔진을 탑재한 <span style="font-weight:bold; color:#e74c3c;">머스탱 EcoBoost</span>는 300마력 이상의 충분한 성능과 함께 합리적인 <span style="font-weight:bold;">가격</span> 및 연비를 제공합니다. 일상 주행과 스포츠 드라이빙을 모두 만족시키며, <span style="font-weight:bold;">머스탱리스</span> 시장에서 가장 많은 선택을 받는 모델입니다.</p>
+      <ul>
+        <li><strong>장점:</strong> GT 대비 낮은 <span style="font-weight:bold;">머스탱 가격</span>, 합리적인 연비, 일상 주행의 편리성.</li>
+        <li><strong>단점:</strong> GT 대비 낮은 출력과 사운드.</li>
+        <li><strong>리스 팁:</strong> <span style="font-weight:bold;">머스탱 EcoBoost</span>는 <span style="font-weight:bold; color:#e74c3c;">머스탱리스</span> 신규 고객을 위한 프로모션이 가장 활발하게 진행됩니다. <span style="font-weight:bold;">저렴한 곳</span>을 찾는다면 EcoBoost 모델의 <span style="font-weight:bold;">신규 가입 혜택</span>을 노리는 것이 좋습니다.</li>
+      </ul>
+
+      <h3>3. 머스탱 Dark Horse (V8 Performance Model) - 최고 성능 모델</h3>
+      <p><strong>주요 특징:</strong> <span style="font-weight:bold; color:#e74c3c;">머스탱 다크호스</span>는 GT 모델을 기반으로 퍼포먼스를 극대화한 트랙 주행 특화 모델입니다. 500마력에 가까운 출력과 정교한 서스펜션이 특징이며, 국내 <span style="font-weight:bold; color:#e74c3c;">머스탱리스</span> 시장에서는 소수 마니아층에게 인기가 있습니다.</p>
+      <ul>
+        <li><strong>장점:</strong> 최고 수준의 퍼포먼스, 희소성.</li>
+        <li><strong>단점:</strong> 높은 <span style="font-weight:bold;">머스탱 가격</span>, 전문적인 관리 필요.</li>
+        <li><strong>리스 팁:</strong> <span style="font-weight:bold; color:#e74c3c;">머스탱 다크호스</span>는 <span style="font-weight:bold; color:#e74c3c;">머스탱리스</span> 계약 시 잔존가치가 높게 책정되어 <span style="font-weight:bold; color:#e74c3c;">머스탱 리스 비용</span>을 효율적으로 관리할 수 있습니다.</li>
+      </ul>
+
+      <p><strong>머스탱 모델별 세부 키워드 목록 (2026년형):</strong></p>
+      <div class="sub-section">
+        <p><strong>머스탱 GT 모델:</strong> 머스탱 GT 프리미엄, 머스탱 GT 컨버터블, 머스탱 V8, 머스탱 5.0L 엔진, 6세대 GT, 7세대 GT, 머스탱 GT 쿠페.</p>
+        <p><strong>머스탱 EcoBoost 모델:</strong> 머스탱 2.3 EcoBoost, 머스탱 EcoBoost 프리미엄, 머스탱 EcoBoost 컨버터블, 머스탱 4기통, 머스탱 터보, 머스탱 연비, 머스탱 유지비.</p>
+        <p><strong>고성능 모델:</strong> 머스탱 Dark Horse, 머스탱 쉘비 GT500, 머스탱 마하1, 머스탱 불릿, 머스탱 마하-E (전기차), 머스탱 Mach-E GT, 머스탱 캘리포니아 스페셜, 머스탱 보스 302, 머스탱 Roush, 머스탱 Saleen.</p>
+      </div>
+    </section>
+
+    <section id="cost">
+      <span id="cost-anchor" class="anchor"></span>
+      <h2><span style="color:#e74c3c;">머스탱리스</span> 견적 비용 상세 분석: 저렴한 곳 찾는 방법 및 팁</h2>
+      <p><span style="font-weight:bold; color:#e74c3c;">머스탱리스</span> <span style="font-weight:bold;">견적</span>은 단순히 월 <span style="font-weight:bold;">비용</span>으로만 판단하기 어렵습니다. 초기 비용(보증금/선납금), 잔존가치, 계약 기간, 주행거리, 보험 조건 등 다양한 요소를 종합적으로 비교해야 <span style="font-weight:bold;">저렴한 곳</span>을 찾을 수 있습니다. <span style="font-weight:bold;">머스탱리스</span> <span style="font-weight:bold;">내돈내산 후기</span>를 살펴보면, 눈에 보이는 월 납입금만 보고 계약했다가 중도 해지 위약금이나 만기 시점의 추가 비용으로 손해를 보는 경우가 많습니다.</p>
+
+      <h3>1. 월 납입금에 영향을 미치는 핵심 요소</h3>
+      <div class="sub-section">
+        <h4>보증금 VS 선납금</h4>
+        <ul>
+          <li><strong>보증금:</strong> 만기 시점에 돌려받을 수 있는 금액 (만기 후 차량 인수 시 인수금으로 사용 가능). 보증금 비율을 높일수록 월 납입금은 낮아집니다.</li>
+          <li><strong>선납금:</strong> 미리 납부하는 리스료. 월 납입금은 낮아지지만, 만기 시점에 돌려받지 못합니다.</li>
+          <li><strong>추천:</strong> <span style="font-weight:bold;">머스탱리스</span>의 <span style="font-weight:bold;">장점</span>을 극대화하려면 보증금 방식을 추천합니다. 만기 시점에 <span style="font-weight:bold;">머스탱 가격</span>의 하락 여부를 보고 반납 또는 인수를 선택할 수 있기 때문입니다.</li>
+        </ul>
+        <h4>잔존가치 (Residual Value)</h4>
+        <ul>
+          <li>잔존가치는 리스 계약 만기 시점의 차량 가치를 의미합니다. 잔존가치를 높게 설정할수록 월 리스료는 낮아집니다.</li>
+          <li><span style="font-weight:bold;">머스탱 GT</span>나 <span style="font-weight:bold; color:#e74c3c;">머스탱 EcoBoost</span>와 같은 인기 모델은 잔존가치가 높게 책정되어 <span style="font-weight:bold; color:#e74c3c;">머스탱리스 비용</span>을 절감하는 데 유리합니다.</li>
+          <li><strong>주의:</strong> 너무 높은 잔존가치 설정은 만기 시 인수금이 높아져 부담이 될 수 있습니다. <span style="font-weight:bold;">머스탱리스</span> 전문가와 상담하여 적정 잔존가치를 설정해야 합니다.</li>
+        </ul>
+        <h4>주행거리 제한</h4>
+        <ul>
+          <li>리스 계약 시 연간 주행거리(1만km~4만km)를 설정합니다. 주행거리가 길수록 월 납입금이 올라갑니다.</li>
+          <li><span style="font-weight:bold;">머스탱리스</span>를 <span style="font-weight:bold;">저렴한 곳</span>에서 찾을 때는 주행거리를 꼼꼼하게 확인하세요. 계약 만기 시 초과 주행 1km당 100~300원의 위약금이 발생할 수 있습니다.</li>
+        </ul>
+      </div>
+
+      <h3>2. <span style="font-weight:bold;">머스탱리스</span> 견적 <span style="font-weight:bold;">비교</span> 및 <span style="font-weight:bold;">순위</span>: 2026년 <span style="font-weight:bold;">평균</span> <span style="font-weight:bold;">가격</span></h3>
+      <div style="overflow-x:auto;">
+        <table>
+          <thead>
+            <tr>
+              <th>구분</th>
+              <th>머스탱 EcoBoost (약 5천만원대)</th>
+              <th>머스탱 GT (약 7천만원대)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>리스 기간</strong></td>
+              <td>48개월</td>
+              <td>48개월</td>
+            </tr>
+            <tr>
+              <td><strong>보증금 비율</strong></td>
+              <td>20% (약 1,000만원)</td>
+              <td>20% (약 1,400만원)</td>
+            </tr>
+            <tr>
+              <td><strong>월 리스료 (예상)</strong></td>
+              <td><span style="color:#e74c3c; font-weight:bold;">약 70만원 ~ 90만원</span></td>
+              <td><span style="color:#e74c3c; font-weight:bold;">약 100만원 ~ 120만원</span></td>
+            </tr>
+            <tr>
+              <td><strong>세금 혜택 (연간)</strong></td>
+              <td>약 700만원 ~ 1,000만원 (손비 처리)</td>
+              <td>약 1,000만원 ~ 1,500만원 (손비 처리)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p><em>*2026년 <span style="font-weight:bold; color:#e74c3c;">머스탱리스</span> <span style="font-weight:bold;">평균</span> 견적 <span style="font-weight:bold;">금액</span>을 기준으로 작성되었으며, 리스사별 프로모션, 개인 신용도에 따라 <span style="font-weight:bold;">차이점</span>이 발생합니다. <span style="font-weight:bold; color:#e74c3c;">머스탱리스</span> <span style="font-weight:bold;">전문</span> <span style="font-weight:bold;">업체</span>를 통해 실시간 <span style="font-weight:bold;">할인</span> 및 <span style="font-weight:bold;">신규 가입 혜택</span>을 비교해 보세요.</em></p>
+    </section>
+
+    <section id="faq">
+      <span id="faq-anchor" class="anchor"></span>
+      <h2><span style="color:#e74c3c;">머스탱리스</span> 자주 묻는 질문 (FAQ)</h2>
+      <dl>
+        <dt>Q1: <span style="font-weight:bold; color:#e74c3c;">머스탱리스</span> 계약 중 튜닝이나 차량 외관 변경이 가능한가요?</dt>
+        <dd>A: 리스 차량의 소유권은 리스사에 있으므로, 차량 외관 변경은 리스사 허가를 받아야 합니다. 특히 엔진 튜닝이나 랩핑 등 원상 복구가 불가능한 변경은 제한됩니다. <span style="font-weight:bold;">머스탱리스</span> 만기 후 반납을 고려한다면 순정 상태를 유지하는 것이 좋습니다. 만약 튜닝을 원한다면 할부 구매를 고려하거나, 리스 계약 시 튜닝 허용 여부를 명시하는 <span style="font-weight:bold;">전문</span> <span style="font-weight:bold;">업체</span>를 찾아야 합니다.</dd>
+        <dt>Q2: <span style="font-weight:bold; color:#e74c3c;">머스탱리스</span> 계약 만기 시 차량 인수를 할 경우 <span style="font-weight:bold;">가격</span>은 어떻게 책정되나요?</dt>
+        <dd>A: <span style="font-weight:bold; color:#e74c3c;">머스탱리스</span> 계약 시 설정한 잔존가치가 만기 시점의 인수 <span style="font-weight:bold;">금액</span>이 됩니다. 만기 시점의 중고차 시세와 잔존가치를 비교하여 인수를 결정할 수 있습니다. 예를 들어, <span style="font-weight:bold; color:#e74c3c;">머스탱 GT</span>의 중고 시세가 잔존가치보다 높으면 인수하여 판매하는 것이 유리할 수 있습니다.</dd>
+        <dt>Q3: <span style="font-weight:bold; color:#e74c3c;">머스탱리스</span> <span style="font-weight:bold;">현금지원</span>이나 <span style="font-weight:bold;">사은품</span> <span style="font-weight:bold;">혜택</span>이 있나요?</dt>
+        <dd>A: <span style="font-weight:bold; color:#e74c3c;">머스탱리스</span> <span style="font-weight:bold;">업체</span>나 딜러사별로 <span style="font-weight:bold;">신규 가입</span> 프로모션이 다릅니다. <span style="font-weight:bold;">현금지원금</span>, 주유권 <span style="font-weight:bold;">상품권</span>, 블랙박스/썬팅 등 <span style="font-weight:bold;">사은품</span> <span style="font-weight:bold;">혜택</span>을 제공하는 경우가 많습니다. <span style="font-weight:bold;">저렴한 곳</span>을 찾을 때 월 납입금뿐만 아니라 이러한 <span style="font-weight:bold;">지원금</span> <span style="font-weight:bold;">혜택</span>도 함께 <span style="font-weight:bold;">비교</span>해야 합니다.</dd>
+        <dt>Q4: <span style="font-weight:bold; color:#e74c3c;">머스탱리스</span> <span style="font-weight:bold;">견적</span>을 받을 때 <span style="font-weight:bold;">저렴한 곳</span>의 <span style="font-weight:bold;">순위</span>는 어떻게 알 수 있나요?</dt>
+        <dd>A: 특정 리스사의 <span style="font-weight:bold;">순위</span>를 매기기보다는, 여러 <span style="font-weight:bold; color:#e74c3c;">머스탱리스</span> <span style="font-weight:bold;">전문</span> <span style="font-weight:bold;">업체</span>의 실시간 <span style="font-weight:bold;">견적</span>을 <span style="font-weight:bold;">비교</span>하는 것이 중요합니다. <span style="font-weight:bold; color:#e74c3c;">머스탱 EcoBoost</span>나 <span style="font-weight:bold; color:#e74c3c;">머스탱 GT</span>는 수요가 많아 리스사별 프로모션 경쟁이 치열합니다. <span style="font-weight:bold; color:#e74c3c;">네이버</span>나 <span style="font-weight:bold; color:#e74c3c;">구글</span>에서 "머스탱리스 <span style="font-weight:bold;">견적</span> <span style="font-weight:bold;">비교</span>"를 검색하여 여러 <span style="font-weight:bold;">전문</span> 플랫폼을 활용하세요.</dd>
+      </dl>
+    </section>
+
+    <section id="detailed-info">
+      <span id="detailed-info-anchor" class="anchor"></span>
+      <h2><span style="color:#e74c3c;">머스탱리스</span> 심층 분석: 2026년 리스 시장 트렌드와 현명한 선택 기준</h2>
+      <p>2026년 국내 자동차 시장은 금리 인상과 경기 불확실성으로 인해 신차 구매보다는 <span style="font-weight:bold; color:#e74c3c;">머스탱리스</span>와 같은 금융 상품을 통한 소비가 증가하는 추세입니다. 특히 포드의 상징인 <span style="font-weight:bold; color:#e74c3c;">머스탱 GT</span>와 <span style="font-weight:bold; color:#e74c3c;">머스탱 EcoBoost</span> 모델은 고가 수입차임에도 불구하고, 리스를 통해 접근성을 높이려는 수요층이 두터워지고 있습니다. 이 섹션에서는 <span style="font-weight:bold; color:#e74c3c;">머스탱리스</span>를 선택할 때 고려해야 할 전문가 수준의 심층 정보를 제공합니다.</p>
+
+      <h3>1. <span style="font-weight:bold; color:#e74c3c;">머스탱리스</span>와 절세 전략: 개인사업자를 위한 팁</h3>
+      <p>개인사업자 및 법인사업자에게 <span style="font-weight:bold; color:#e74c3c;">머스탱리스</span>는 <span style="font-weight:bold;">장점</span>이 극대화되는 금융 상품입니다. 사업자는 <span style="font-weight:bold;">머스탱리스 비용</span>을 전액 손비(경비)로 처리할 수 있어 소득세나 법인세를 절감할 수 있습니다. 2026년 현재 세법상 업무용 승용차 관련 비용 공제 한도는 연간 1,500만원(리스료 + 유류비 + 수리비 등)으로 책정되어 있습니다. 이 한도 내에서 <span style="font-weight:bold; color:#e74c3c;">머스탱리스</span>를 활용하면 세금 절감 <span style="font-weight:bold;">혜택</span>을 누릴 수 있습니다. 특히 <span style="font-weight:bold; color:#e74c3c;">머스탱 GT</span>와 같은 고가 차량은 월 리스료가 높기 때문에 세금 공제 한도를 충분히 활용할 수 있습니다.</p>
+      <div class="highlight">
+        <h4><span style="font-weight:bold; color:#e74c3c;">머스탱리스</span> 세금 공제 <span style="font-weight:bold; color:#e74c3c;">전문</span> <span style="font-weight:bold; color:#e74c3c;">업체</span> 활용 팁:</h4>
+        <p>세금계산서 발행 및 장부 처리를 효율적으로 관리해주는 <span style="font-weight:bold; color:#e74c3c;">머스탱리스</span> <span style="font-weight:bold; color:#e74c3c;">업체</span>를 선택해야 합니다. 일부 <span style="font-weight:bold; color:#e74c3c;">저렴한 곳</span>은 계약 편의성만 강조하여 세무 처리 지원이 미흡할 수 있으므로, <span style="font-weight:bold; color:#e74c3c;">전문</span> <span style="font-weight:bold; color:#e74c3c;">업체</span>의 상담이 필수입니다.</p>
+      </div>
+
+      <h3>2. <span style="font-weight:bold; color:#e74c3c;">머스탱리스</span> <span style="font-weight:bold; color:#e74c3c;">내돈내산 후기</span> 및 <span style="font-weight:bold; color:#e74c3c;">디시</span> 이용자 경험 분석</h3>
+      <p><span style="font-weight:bold; color:#e74c3c;">머스탱리스</span> <span style="font-weight:bold; color:#e74c3c;">후기</span>를 <span style="font-weight:bold; color:#e74c3c;">네이버</span> 카페나 <span style="font-weight:bold; color:#e74c3c;">디시</span> 인사이드 자동차 갤러리에서 찾아보면 다양한 경험담을 접할 수 있습니다. <span style="font-weight:bold; color:#e74c3c;">머스탱 EcoBoost</span> <span style="font-weight:bold; color:#e74c3c;">내돈내산 후기</span>에서는 대부분 '합리적인 가격으로 드림카를 경험할 수 있었다'는 <span style="font-weight:bold; color:#e74c3c;">장점</span>이 강조됩니다. 반면, 일부 <span style="font-weight:bold; color:#e74c3c;">단점</span>으로는 '중도 해지 시 위약금 부담'이나 '주행거리 제한으로 인한 불편함'이 언급되기도 합니다.</p>
+      <div class="sub-section">
+        <p><strong>주요 <span style="font-weight:bold; color:#e74c3c;">머스탱리스</span> <span style="font-weight:bold; color:#e74c3c;">내돈내산 후기</span> 키워드:</strong></p>
+        <ul>
+          <li><strong>A씨 (EcoBoost 리스 36개월):</strong> "<span style="font-weight:bold; color:#e74c3c;">머스탱리스</span> <span style="font-weight:bold; color:#e74c3c;">가격</span>이 <span style="font-weight:bold; color:#e74c3c;">예상</span>보다 <span style="font-weight:bold; color:#e74c3c;">저렴한 곳</span>을 찾아서 바로 계약했습니다. <span style="font-weight:bold; color:#e74c3c;">머스탱 GT</span>는 부담스러웠는데 <span style="font-weight:bold; color:#e74c3c;">EcoBoost</span>는 <span style="font-weight:bold; color:#e74c3c;">평균</span> 월 <span style="font-weight:bold; color:#e74c3c;">비용</span>이 <span style="font-weight:bold; color:#e74c3c;">얼마</span>인지 <span style="font-weight:bold; color:#e74c3c;">견적</span>을 받아보니 만족스러웠습니다. 다만 주행거리 초과가 신경 쓰이네요."</li>
+          <li><strong>B씨 (GT 리스 48개월):</strong> "사업자라 <span style="font-weight:bold; color:#e74c3c;">머스탱리스</span>로 <span style="font-weight:bold; color:#e74c3c;">머스탱 GT</span>를 선택했습니다. <span style="font-weight:bold; color:#e74c3c;">신규 가입 혜택</span>으로 <span style="font-weight:bold; color:#e74c3c;">현금지원금</span>을 받고 월 납입금 전체를 경비 처리하니 <span style="font-weight:bold; color:#e74c3c;">장점</span>이 컸습니다."</li>
+        </ul>
+        <p>이러한 <span style="font-weight:bold; color:#e74c3c;">후기</span>를 종합해 보면, <span style="font-weight:bold; color:#e74c3c;">머스탱리스</span>는 <span style="font-weight:bold; color:#e74c3c;">신규 가입</span> 시점의 <span style="font-weight:bold; color:#e74c3c;">할인</span> <span style="font-weight:bold; color:#e74c3c;">혜택</span>과 <span style="font-weight:bold; color:#e74c3c;">견적</span> <span style="font-weight:bold; color:#e74c3c;">비교</span>가 핵심임을 알 수 있습니다.</p>
+      </div>
+
+      <h3>3. <span style="font-weight:bold; color:#e74c3c;">머스탱리스</span>와 AI, 디지털 마케팅: 2026년 트렌드</h3>
+      <p>최근 <span style="font-weight:bold; color:#e74c3c;">머스탱리스</span> <span style="font-weight:bold; color:#e74c3c;">전문</span> <span style="font-weight:bold; color:#e74c3c;">업체</span>들은 <span style="font-weight:bold; color:#e74c3c;">네이버</span>, <span style="font-weight:bold; color:#e74c3c;">구글</span>, <span style="font-weight:bold; color:#e74c3c;">유튜브</span>, <span style="font-weight:bold; color:#e74c3c;">인스타그램</span>, <span style="font-weight:bold; color:#e74c3c;">페이스북</span> 등 다양한 채널에서 활발한 마케팅을 펼치고 있습니다. 특히 AI 기술을 활용한 개인 맞춤형 <span style="font-weight:bold; color:#e74c3c;">머스탱리스</span> <span style="font-weight:bold; color:#e74c3c;">견적</span> 서비스가 등장하고 있습니다. <span style="font-weight:bold; color:#e74c3c;">ChatGPT</span>나 <span style="font-weight:bold; color:#e74c3c;">Gemini</span>와 같은 <span style="font-weight:bold; color:#e74c3c;">AI</span> 에이전트가 고객의 조건(직업, 주행거리, 초기 자금)을 입력받아 최적의 <span style="font-weight:bold; color:#e74c3c;">머스탱리스</span> <span style="font-weight:bold; color:#e74c3c;">견적</span>을 실시간으로 <span style="font-weight:bold; color:#e74c3c;">비교</span>해주는 서비스도 개발되고 있습니다. <span style="font-weight:bold; color:#e74c3c;">머스탱리스</span> <span style="font-weight:bold; color:#e74c3c;">전문</span> <span style="font-weight:bold; color:#e74c3c;">업체</span>들은 <span style="font-weight:bold; color:#e74c3c;">AI</span>를 활용하여 고객에게 <span style="font-weight:bold; color:#e74c3c;">저렴한 곳</span>의 <span style="font-weight:bold; color:#e74c3c;">가격</span> 정보를 제공하고 있습니다.</p>
+      <div class="highlight">
+        <h4><span style="font-weight:bold; color:#e74c3c;">머스탱리스</span> <span style="font-weight:bold; color:#e74c3c;">전문</span>가 <span style="font-weight:bold; color:#e74c3c;">추천</span> <span style="font-weight:bold; color:#e74c3c;">순위</span> 비교 팁:</h4>
+        <p>리스 시장의 <span style="font-weight:bold; color:#e74c3c;">순위</span>는 <span style="font-weight:bold; color:#e74c3c;">할인</span>율, <span style="font-weight:bold; color:#e74c3c;">현금지원</span>, <span style="font-weight:bold; color:#e74c3c;">사은품</span> <span style="font-weight:bold; color:#e74c3c;">혜택</span>을 종합하여 매겨집니다. <span style="font-weight:bold; color:#e74c3c;">머스탱리스</span> <span style="font-weight:bold; color:#e74c3c;">전문</span> <span style="font-weight:bold; color:#e74c3c;">업체</span>는 <span style="font-weight:bold; color:#e74c3c;">업체</span>별 <span style="font-weight:bold; color:#e74c3c;">비용</span> <span style="font-weight:bold; color:#e74c3c;">차이점</span>을 분석하여 <span style="font-weight:bold; color:#e74c3c;">저렴한 곳</span>을 <span style="font-weight:bold; color:#e74c3c;">추천</span>해줄 수 있습니다.</p>
+      </div>
+
+      <h3>4. <span style="font-weight:bold; color:#e74c3c;">머스탱리스</span> 계약 시 주의사항 체크리스트</h3>
+      <div class="sub-section">
+        <ol>
+          <li><strong>위약금 조항 확인:</strong> 중도 해지 시 <span style="font-weight:bold; color:#e74c3c;">머스탱리스</span> 위약금 산정 기준을 반드시 확인하세요.</li>
+          <li><strong>보험 조건 확인:</strong> 리스사마다 보험 조건이 다르므로, 사고 시 보험 처리 방식과 면책금 규정을 체크해야 합니다.</li>
+          <li><strong>정비 조건 확인:</strong> <span style="font-weight:bold; color:#e74c3c;">머스탱 GT</span>나 <span style="font-weight:bold; color:#e74c3c;">머스탱 Dark Horse</span>와 같은 고성능 차량은 정기적인 관리가 중요합니다. 정비 포함 상품인지 여부를 확인하세요.</li>
+          <li><strong>만기 시점 처리 명시:</strong> 계약서에 만기 후 인수, 반납, 재리스 중 어떤 방식으로 처리할지 명시해야 합니다.</li>
+        </ol>
+      </div>
+
+      <h3>5. <span style="font-weight:bold; color:#e74c3c;">머스탱리스</span> 관련 외부 신뢰 사이트 참조</h3>
+      <p>리스 계약은 금융 상품이므로, 다음 공공기관 사이트를 참고하여 정보를 확인하세요:</p>
+      <ul>
+        <li><strong>한국소비자원:</strong> <a href="https://www.kca.go.kr" target="_blank">자동차 리스/렌탈 관련 소비자 피해 구제 정보 (kca.go.kr)</a></li>
+        <li><strong>여신금융협회:</strong> <a href="https://www.crefia.or.kr" target="_blank">금융 상품 비교 공시 (crefia.or.kr)</a></li>
+        <li><strong>국토교통부:</strong> <a href="https://www.molit.go.kr" target="_blank">자동차 관련 법규 및 정책 정보 (molit.go.kr)</a></li>
+        <li><strong>포드코리아 공식 사이트:</strong> <a href="https://www.ford-korea.com" target="_blank">머스탱 공식 가격 및 프로모션 정보 (ford-korea.com)</a></li>
+        <li><strong>네이버 자동차 백과:</strong> <a href="https://auto.naver.com/dictionary" target="_blank">자동차 리스 용어 정의 및 <span style="font-weight:bold; color:#e74c3c;">머스탱</span> 모델 정보 (auto.naver.com)</a></li>
+      </ul>
+      <p>저희는 <span style="font-weight:bold; color:#e74c3c;">머스탱리스</span> <span style="font-weight:bold; color:#e74c3c;">전문</span> <span style="font-weight:bold; color:#e74c3c;">업체</span>로서 고객님의 상황에 맞는 최적의 <span style="font-weight:bold; color:#e74c3c;">견적</span>을 제공해 드립니다. <span style="font-weight:bold; color:#e74c3c;">머스탱 GT</span>, <span style="font-weight:bold; color:#e74c3c;">머스탱 EcoBoost</span>, <span style="font-weight:bold; color:#e74c3c;">머스탱 다크호스</span> 등 어떤 모델을 원하시든 <span style="font-weight:bold; color:#e74c3c;">저렴한 곳</span>의 <span style="font-weight:bold; color:#e74c3c;">가격</span>으로 만나볼 수 있도록 돕겠습니다.</p>
+    </section>
+
+    <section id="contact">
+      <span id="contact-anchor" class="anchor"></span>
+      <h2><span style="color:#e74c3c;">머스탱리스</span> 맞춤 견적 신청: <span style="font-weight:bold;">저렴한 곳</span>에서 <span style="font-weight:bold;">신규 가입 혜택</span> 받기</h2>
+      <p>고객님의 운전 습관, 주행거리, 초기 자금 여부에 따라 <span style="font-weight:bold; color:#e74c3c;">머스탱리스 비용</span>은 크게 달라집니다. 지금 바로 문의하시면 <span style="font-weight:bold; color:#e74c3c;">머스탱리스</span> <span style="font-weight:bold; color:#e74c3c;">전문가</span>가 여러 리스사의 <span style="font-weight:bold; color:#e74c3c;">가격</span>을 <span style="font-weight:bold; color:#e74c3c;">비교</span>하여 최적의 <span style="font-weight:bold; color:#e74c3c;">견적</span>을 제공해 드립니다.</p>
+      <form action="/submit" method="POST" style="max-width:700px; margin:auto; padding:30px; border:1px solid #e0e6ec; border-radius:10px; background:#f9f9f9;">
+        <div class="form-group">
+          <label for="name">이름<span style="color:red;">*</span></label>
+          <input type="text" id="name" name="name" required placeholder="예: 홍길동" />
+        </div>
+        <div class="form-group">
+          <label for="phone">연락처<span style="color:red;">*</span></label>
+          <input type="tel" id="phone" name="phone" required placeholder="010-1234-5678" pattern="[0-9\-]+" />
+        </div>
+        <div class="form-group">
+          <label for="car_model">희망 모델<span style="color:red;">*</span></label>
+          <select id="car_model" name="car_model" required>
+            <option value="">모델을 선택하세요</option>
+            <option value="Mustang EcoBoost">머스탱 EcoBoost (2.3L 터보)</option>
+            <option value="Mustang GT">머스탱 GT (5.0L V8)</option>
+            <option value="Mustang Dark Horse">머스탱 Dark Horse (고성능 V8)</option>
+            <option value="Mustang Convertible">머스탱 컨버터블</option>
+            <option value="Mustang Mach-E">머스탱 마하-E (전기차)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="lease_term">희망 계약 기간 (개월)</label>
+          <select id="lease_term" name="lease_term" required>
+            <option value="">기간을 선택하세요</option>
+            <option value="36">36개월</option>
+            <option value="48">48개월</option>
+            <option value="60">60개월</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="mileage">연간 주행거리 (km)</label>
+          <select id="mileage" name="mileage">
+            <option value="10000">10,000 km</option>
+            <option value="15000">15,000 km</option>
+            <option value="20000">20,000 km</option>
+            <option value="unlimited">무제한 (견적 시 별도 상담)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>초기 비용 납부 방식</label>
+          <div class="radio-group">
+            <label><input type="radio" name="initial_cost_type" value="보증금" checked> 보증금 (만기 환급)</label>
+            <label><input type="radio" name="initial_cost_type" value="선납금"> 선납금 (비환급)</label>
+            <label><input type="radio" name="initial_cost_type" value="보증금X선납금X"> 초기 비용 없음</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="deposit_amount">희망 보증금/선납금 (예: 20%)</label>
+          <input type="text" id="deposit_amount" name="deposit_amount" placeholder="예: 20% 또는 1,000만원" />
+        </div>
+        <div class="form-group">
+          <label for="extra_request">추가 요청 사항</label>
+          <textarea id="extra_request" name="extra_request" rows="4" placeholder="예: 사업자 리스로 세금 혜택을 받고 싶습니다. 또는 '머스탱 GT' 신규 프로모션 할인 정보를 알고 싶습니다."></textarea>
+        </div>
+        <button type="submit" class="btn-cta">맞춤 견적 문의 신청하기</button>
+      </form>
+    </section>
+  </main>
+
+  
